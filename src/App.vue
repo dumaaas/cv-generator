@@ -106,7 +106,7 @@ body {
 
 .cv-avatar img {
   width: 117px;
-  height: 140px;
+  height: 117px;
   border-radius: 50%;
 }
 
