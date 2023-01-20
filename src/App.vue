@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <CVTabs @setactivetab="activeTab = $event" :activeTab="activeTab" />
-    <CVForm v-if="activeTab == 0" ref="form" />
-    <CVPreview v-if="activeTab == 1" ref="preview" />
-    <CVExample v-if="activeTab == 2" ref="preview" />
+    <CVForm v-show="activeTab == 0" ref="form" />
+    <CVPreview v-show="activeTab == 1" ref="preview" />
+    <CVExample v-show="activeTab == 2" ref="preview" />
 
     <md-button
       v-if="activeTab == 0"
