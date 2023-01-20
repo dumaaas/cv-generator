@@ -5,7 +5,7 @@
       class="tab"
       :class="{ active: activeTab == 0 }"
     >
-      CV Form
+      {{ translation.form }}
     </div>
     <div class="line"></div>
     <div
@@ -13,23 +13,30 @@
       class="tab"
       :class="{ active: activeTab == 1 }"
     >
-      Preview
+      {{ translation.preview }}
     </div>
-     <div class="line"></div>
-     <div
+    <div class="line"></div>
+    <div
       @click="$emit('setactivetab', 2)"
       class="tab"
       :class="{ active: activeTab == 2 }"
     >
-      Example
+      {{ translation.example }}
     </div>
   </div>
 </template>
 
 <script>
+import { useCvStore } from "@/stores/cv";
+
 export default {
   props: {
     activeTab: Number,
+  },
+  computed: {
+    translation() {
+      return useCvStore().getCvTranslationHeader;
+    },
   },
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="cv-outter">
-    <div id="cv">
+    <div id="cv" style="font-family: 'Quicksand', sans-serif"> 
       <div class="cv-left">
         <div class="cv-header">
           <h1>Marko Dumnic</h1>

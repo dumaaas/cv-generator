@@ -61,8 +61,7 @@ export default {
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC&family=Cookie&family=Handlee&family=Montserrat&family=Nunito&family=Open+Sans&family=Quicksand&family=Roboto&family=Roboto+Condensed&family=Rowdies&family=Sofia+Sans&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -81,7 +80,6 @@ body {
 }
 #cv {
   display: flex;
-  font-family: "Quicksand", sans-serif;
   background: #ffffe0;
   width: 100%;
   height: 100%;
@@ -110,7 +108,7 @@ body {
 .cv-avatar img {
   max-width: 117px;
   max-height: 117px;
-   min-width: 117px;
+  min-width: 117px;
   min-height: 117px;
 }
 
@@ -408,9 +406,9 @@ body {
   gap: 16px;
   align-items: center;
   width: 50%;
-    font-size: 14px;
+  font-size: 14px;
   line-height: 20px;
-  color: rgba(0,0,0,0.87);
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .color-picker .vue-swatches__container {
@@ -428,19 +426,22 @@ body {
 .image-upload label {
   padding: 6px 8px;
   border-radius: 6px;
-  border: 1px solid rgba(0,0,0,0.87);
+  border: 1px solid rgba(0, 0, 0, 0.87);
   font-size: 14px;
   line-height: 20px;
-  color: rgba(0,0,0,0.87);
+  color: rgba(0, 0, 0, 0.87);
   cursor: pointer;
 }
 
 .image-upload-label {
-    font-size: 14px;
+  font-size: 14px;
   line-height: 20px;
   margin-bottom: 5px;
-  color: rgba(0,0,0,0.87);
+  color: rgba(0, 0, 0, 0.87);
   margin-top: 10px;
 }
 
+.md-select-menu {
+  z-index: 1001 !important;
+}
 </style>

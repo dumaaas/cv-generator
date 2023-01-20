@@ -1,6 +1,9 @@
 <template>
   <div class="cv-outter">
-    <div id="cv" style="min-height: 100vh">
+    <div
+      id="cv"
+      :style="`min-height: 100vh; font-family: ${cvInfo.theme.fontFamily};`"
+    >
       <div
         class="cv-left"
         :style="cvInfo.theme.position ? 'order: 1' : 'order: auto'"
@@ -65,7 +68,7 @@
           >
             <div class="cv-section-title">
               <h2 :style="`border-color: ${cvInfo.theme.primaryColor}`">
-                Summary
+                {{sectionTitleTranslations.summary}}
               </h2>
             </div>
             <p>
@@ -82,7 +85,7 @@
           >
             <div class="cv-section-title">
               <h2 :style="`border-color: ${cvInfo.theme.primaryColor}`">
-                Professional Experience
+                {{sectionTitleTranslations.proffesionalExperiance}}
               </h2>
             </div>
             <div class="experiances-items">
@@ -122,7 +125,7 @@
           >
             <div class="cv-section-title">
               <h2 :style="`border-color: ${cvInfo.theme.primaryColor}`">
-                Projects
+                {{sectionTitleTranslations.projects}}
               </h2>
             </div>
             <div class="project-items">
@@ -162,7 +165,7 @@
           >
             <div class="cv-section-title">
               <h2 :style="`border-color: ${cvInfo.theme.primaryColor}`">
-                Education
+                {{sectionTitleTranslations.education}}
               </h2>
             </div>
             <div class="experiances-items">
@@ -213,7 +216,7 @@
             v-if="cvInfo && cvInfo.skills && cvInfo.skills[0].skillName"
           >
             <div class="cv-section-title">
-              <h2>Skills</h2>
+              <h2>{{sectionTitleTranslations.skills}}</h2>
             </div>
             <div class="skill-items">
               <div
@@ -237,7 +240,7 @@
             v-if="cvInfo && cvInfo.languages && cvInfo.languages[0].name"
           >
             <div class="cv-section-title">
-              <h2>Languages</h2>
+              <h2>{{sectionTitleTranslations.languages}}</h2>
             </div>
             <div class="language-items">
               <div
@@ -279,7 +282,7 @@
             v-if="cvInfo && cvInfo.hobbies && cvInfo.hobbies[0].name"
           >
             <div class="cv-section-title">
-              <h2>Hobbies</h2>
+              <h2>{{sectionTitleTranslations.hobbies}}</h2>
             </div>
             <div class="hobbie-items">
               <div class="hobbie-item" v-if="cvInfo.hobbies[0].name">
@@ -303,7 +306,7 @@
             "
           >
             <div class="cv-section-title">
-              <h2>Find Me Online</h2>
+              <h2>{{sectionTitleTranslations.social}}</h2>
             </div>
             <div class="social-items">
               <div class="social-item" v-if="cvInfo.social.linkedin">
@@ -413,6 +416,9 @@ export default {
     cvInfo() {
       return useCvStore().cvInfo;
     },
+    sectionTitleTranslations() {
+      return useCvStore().getCvTranslationSections;
+    },
   },
   methods: {
     exportToPDF() {
@@ -440,5 +446,6 @@ export default {
   /* to centre page on screen*/
   margin: 80px auto 100px auto;
   border: 1px solid #ccc;
+  font-family: sans-serif !important;
 }
 </style>

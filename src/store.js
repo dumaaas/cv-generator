@@ -7,16 +7,21 @@ Vue.use(Vuex);
 // Create a new store instance.
 export const store = new Vuex.Store({
   state: {
-    cvInfo: {}
+    cvInfo: {},
+    
   },
   getters: {
-    getCvInfo (state) {
-        return state.cvInfo;
-    }
+    getCvInfo(state) {
+      return state.cvInfo;
+    },
+
   },
   mutations: {
-    setCvInfo (state, payload) {
+    setCvInfo(state, payload) {
       state.cvInfo = payload;
+    },
+    setActiveLanguage(state, payload) {
+      state.activeLanguage = payload;
     }
   }
 })
