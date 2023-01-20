@@ -11,10 +11,27 @@
           <label for="first-name">CV Name</label>
           <md-input v-model="cvInfo.theme.cvName" />
         </md-field>
-        <md-field>
-          <label for="first-name">Theme color</label>
-          <md-input v-model="cvInfo.theme.color" />
-        </md-field>
+        <div class="color-picker-container">
+          <div class="color-picker">
+            <v-swatches
+              v-model="cvInfo.theme.primaryColor"
+              show-fallback
+              fallback-input-type="color"
+              popover-x="left"
+            ></v-swatches>
+            <label>Theme Primary Color</label>
+          </div>
+          <div class="color-picker">
+            <v-swatches
+              v-model="cvInfo.theme.secondaryColor"
+              show-fallback
+              fallback-input-type="color"
+              popover-x="left"
+            ></v-swatches>
+            <label>Theme Secondary Color</label>
+          </div>
+        </div>
+
         <div class="md-layout md-gutter">
           <div class="md-layout-item md-small-size-100">
             <md-switch v-model="cvInfo.theme.avatar" class="md-primary"
@@ -34,9 +51,20 @@
       <md-card-header>
         <div class="md-title">Your Info</div>
       </md-card-header>
-
       <md-card-content>
+        <p class="image-upload-label">Avatar</p>
+        <div class="image-upload">
+          <img style="min-width: 48px; max-width: 48px; min-height: 48px; max-height: 48px; border-radius: 50%" :src="cvInfo.userInfo.avatar ? cvInfo.userInfo.avatar : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAASZSURBVHgB1ZprbttGEIBnV6QoWn6QaIGi/VMZSB8p2to8QZUbOCdIewInJ6h8A/cEVU+Q3KD1CaS2P4KiAawESAIjMSjJkiiRNDcztCQoelDirh72ByxErpbizM7s7OyuGCwB13UtyOhHGoND4PxLIeCQCWEBY9agjQCoMSwgor8Zy1SCoHtm23YNFGEgCQmtZXPHIEQRb4sgR5UBO1VRJrUCQ8Gj6PFoD6vCQJSDwD9Jq0gqBa7a3q/LFnwCxko7efNk4eaLNMJeL+i68RT9+BDWAI2VIOg9WMQafF6Dluc90rRsZV3CE/iugqYblWazfTSvbaIC5DLiWpRX6jKzsRhnT2O3TWCmC8UPClGC20DCuJiqAJmOtIdbBMuwn7dN84+J+vEKGrDk8xtymyTqYdBzxgf2hAKtVuecBhFI4nV70PG60O50IQzDuC6b1cHAYu3tgK5poEB1Z3vLGa34SAEVv4+iCNzGFTSarcR2e7vbYKMinM8NgNPfI8TJ3k6+NLgfKhC7jm6cgwQk/JuL9+D7wULtySJffPaprBLkSvvoSnW6Gf5CJqOXQBLq+UWFJ6gtPSOJxbXs48FNbAGV3ic/f/X6AmT4HK1g5gyQYGiF2ALY+0WQRKEn48EuydAKsQIY849Bkp7vgyztjgeycMZ+ij/JfVAF6TzH90OQJQyvQYEipfZcxX02Dcp+xAVTyzI1LQOyUDhVgWTnnPEDUCBv5kAWQ1dTgAEvcJW0gdjaMkEWy9oFFTiDAyxqClAcx6kd0kIpha7gfoSgcApLwMaeTOPP1JbyoSVgsatWR8ASiJO5ehMaV+3EdqrJ3DioQNvFj6Xl/hTbSRGa4PzgZo6gSJU3TRwvOdnUYSasifm/6jjYFLR7wZmAKtxRaLuSRxC9hDtKhPusd9oCGdwkZvFep264IAlFnx4uUPx+6QUB1onheniAhmthGswUfQxdgxwOZlonq0SjMGD78YIGQ+mfkGKHmYTGZ6CN+XwXF/EqkCKUjlCESrfgF7jAzzvxE7hQPsP8ujjvEdpxoAWMqtCj0G9RuXQbsTI0RywSajEPOr35hP6WuZ49nzUfrELwJMjVPrEtyG/NThTJfWzbrMUOSGtLdNvfJhqhH9Nuw1ss6xL+5r3XcPHuEt5duhCEkwsmPBQpk/A3133GrUD7O26jGQ/ITULWsPd2ATe0hnWD3qfrYQgYtQL5I5VNC0+QNcgSJE8MbmwNhCcmthb/e1GrdHvB2s4C0mAYeu3be4X90bqJINwJvIc4R9fhtoEyeYH3YLx6QgHn/v1aBOIJ3DIiHv1Cso3XT50Gne+/LuNctfBB28pBWZzvvnk27avEQ77Kv/+XcKZPPOJZOSj8wQ9flWZ9PfeUsvLPiyPOxe/Ycr0HHujzUcSeOD/eKyc1W+iYtfL8eYFHGcyXWAHWQzXi4cNpPj9OqoPulbsU9TrORU6Cy4yT+q8GZA24zpQw+XsEy6IvOIStU8dxUoVw6T979BUpYl5yzCS3J4WAv7CcyQg+QFqBUQbK4OUhKnTAmCh8NF5oYmSiLoBXhYiXsFUI2s9khR7lAwmyEYQS24fWAAAAAElFTkSuQmCC'" alt="avatar"/>
+          <label for="avatar-upload">{{cvInfo.userInfo.avatar ? 'Change' : 'Upload'}}</label>
+          <input
+            style="display: none"
+            id="avatar-upload"
+            type="file"
+            @change="onFileChange($event)"
+          />
+        </div>
         <div class="md-layout md-gutter">
+         
           <div class="md-layout-item md-small-size-100">
             <md-field>
               <label for="first-name">Name</label>
@@ -51,7 +79,6 @@
             </md-field>
           </div>
         </div>
-
         <div class="md-layout md-gutter">
           <div class="md-layout-item md-small-size-100">
             <md-field>
@@ -69,7 +96,6 @@
             </md-field>
           </div>
         </div>
-
         <div class="md-layout md-gutter">
           <div class="md-layout-item md-small-size-100">
             <md-field>
@@ -97,7 +123,7 @@
           <div class="md-layout-item md-small-size-100">
             <md-field>
               <label>Textarea</label>
-              <md-textarea></md-textarea>
+              <md-textarea v-model="cvInfo.summary.description"></md-textarea>
             </md-field>
           </div>
         </div>
@@ -302,7 +328,7 @@
                   <div class="md-layout-item md-small-size-100">
                     <md-field>
                       <label for="first-name">School Title</label>
-                      <md-input v-model="item.projectDescription" />
+                      <md-input v-model="item.schoolTitle" />
                       <SchoolIcon fillColor="rgba(0,0,0,0.54)" />
                     </md-field>
                   </div>
@@ -562,6 +588,9 @@ import AccountSchoolIcon from "vue-material-design-icons/AccountSchool.vue";
 import SchoolIcon from "vue-material-design-icons/School.vue";
 import CityIcon from "vue-material-design-icons/City.vue";
 import CalendarIcon from "vue-material-design-icons/Calendar.vue";
+import { useCvStore } from "@/stores/cv";
+import VSwatches from "vue-swatches";
+import "vue-swatches/dist/vue-swatches.css";
 
 export default {
   components: {
@@ -577,98 +606,32 @@ export default {
     SchoolIcon,
     CityIcon,
     CalendarIcon,
+    VSwatches,
   },
   data() {
     return {
-      cvInfo: {
-        theme: {
-          cvName: "",
-          color: "",
-          avatar: false,
-          position: false,
-        },
-        userInfo: {
-          name: "",
-          jobTitle: "",
-          phone: "",
-          email: "",
-          country: "",
-          city: "",
-        },
-        summary: {
-          description: "",
-        },
-        proffesionalExperiance: [
-          {
-            jobTitle: "",
-            companyName: "",
-            companyResidance: "",
-            yearFrom: null,
-            yearTo: null,
-            details: [
-              {
-                detail: "",
-              },
-            ],
-          },
-        ],
-        projects: [
-          {
-            projectTitle: "",
-            projectResidance: "",
-            projectDescription: "",
-            details: [
-              {
-                detail: "",
-              },
-            ],
-          },
-        ],
-        education: [
-          {
-            schoolName: "",
-            schoolTitle: "",
-            schoolResidance: "",
-            yearFrom: null,
-            yearTo: null,
-          },
-        ],
-        skills: [
-          {
-            skillName: "",
-            setOfSkills: [
-              {
-                skill: "",
-              },
-            ],
-          },
-        ],
-        languages: [
-          {
-            name: "",
-            level: "",
-            stars: null,
-          },
-        ],
-        hobbies: [
-          {
-            name: "",
-          },
-        ],
-        social: {
-          facebook: "",
-          linkedin: "",
-          twitter: "",
-          instagram: "",
-          github: "",
-          discord: "",
-        },
-      },
+      cvStore: useCvStore(),
+      cvInfo: null,
     };
   },
+  mounted() {
+    this.cvInfo = this.cvStore.getCvInfo;
+  },
   methods: {
+    onFileChange(e)  {
+        let files = e.target.files;
+        let fileReader = new FileReader();
+        fileReader.readAsDataURL(files[0]);
+        var base64 = '';
+        fileReader.onload = () => {
+            base64 = fileReader.result;
+            console.log(base64, 'hej')
+            this.cvInfo.userInfo.avatar = base64;
+        }
+    
+    },
     saveCvInfo() {
-      this.$store.commit("setCvInfo", this.cvInfo);
+      this.cvStore.setCvInfo(this.cvInfo);
     },
     addNewJob() {
       var newJob = {

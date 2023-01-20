@@ -18,7 +18,10 @@
       >Export CV</md-button
     >
     <div class="tag">
-      <p>built with ❤️ by @dumaaas</p>
+      <p>
+        built with ❤️ by
+        <a href="https://github.com/dumaaas/" target="_blank">@dumaaas</a>
+      </p>
     </div>
   </div>
 </template>
@@ -28,6 +31,7 @@ import CVTabs from "./components/CVTabs.vue";
 import CVForm from "./components/CVForm.vue";
 import CVPreview from "./components/CVPreview.vue";
 import CVExample from "./components/CVExample.vue";
+import { useCvStore } from "@/stores/cv";
 
 export default {
   name: "App",
@@ -35,16 +39,15 @@ export default {
     CVTabs,
     CVForm,
     CVPreview,
-    CVExample
+    CVExample,
   },
   data() {
     return {
-      activeTab: 2,
+      activeTab: 0,
+      cvStore: useCvStore(),
     };
   },
-  mounted() {
-    this.$store.commit("setCvInfo", "hajde mala dodji u moju sobu");
-  },
+
   computed: {},
   methods: {
     saveCvInfo() {
@@ -105,9 +108,10 @@ body {
 }
 
 .cv-avatar img {
-  width: 117px;
-  height: 117px;
-  border-radius: 50%;
+  max-width: 117px;
+  max-height: 117px;
+   min-width: 117px;
+  min-height: 117px;
 }
 
 .cv-header {
@@ -221,12 +225,13 @@ body {
   align-items: center;
 }
 
-.experiance-item-header.smaller-header h3, .experiance-item-subheader.smaller-header h3 {
+.experiance-item-header.smaller-header h3,
+.experiance-item-subheader.smaller-header h3 {
   font-size: 14px;
 }
 
 .experiance-item-subheader h3 {
-  color: #1ab3b8 !important;
+  color: #1ab3b8;
 }
 
 .experiance-item-header.smaller-header,
@@ -257,7 +262,7 @@ body {
 }
 
 .project-item-header h3 {
-  color: #1ab3b8 !important;
+  color: #1ab3b8;
 }
 
 .project-item-details p {
@@ -276,7 +281,6 @@ body {
 .project-item-details p.project-item-details-title {
   font-size: 14px;
 }
-
 
 .skill-item {
   margin-bottom: 16px;
@@ -392,4 +396,51 @@ body {
   color: #fff !important;
   word-break: break-all;
 }
+
+.color-picker-container {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  position: relative;
+}
+.color-picker {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  width: 50%;
+    font-size: 14px;
+  line-height: 20px;
+  color: rgba(0,0,0,0.87);
+}
+
+.color-picker .vue-swatches__container {
+  z-index: 999 !important;
+}
+
+.image-upload {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+.image-upload label {
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.87);
+  font-size: 14px;
+  line-height: 20px;
+  color: rgba(0,0,0,0.87);
+  cursor: pointer;
+}
+
+.image-upload-label {
+    font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 5px;
+  color: rgba(0,0,0,0.87);
+  margin-top: 10px;
+}
+
 </style>

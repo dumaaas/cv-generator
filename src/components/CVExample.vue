@@ -2,7 +2,7 @@
   <div class="cv-outter">
     <div id="cv">
       <div class="cv-left">
-        <div class="cv-header" @click="exportToPDF">
+        <div class="cv-header">
           <h1>Marko Dumnic</h1>
           <p class="job-title">Frontend Developer</p>
           <div class="cv-header-contact">

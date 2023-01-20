@@ -1,311 +1,397 @@
 <template>
   <div class="cv-outter">
     <div id="cv" style="min-height: 100vh">
-        <div class="cv-left">
-            
-        </div>
-        <div class="cv-right"></div>
-      <!-- <div class="cv-left">
-        <div class="cv-header" @click="exportToPDF">
-          <h1>Marko Dumnic</h1>
-          <p class="job-title">Frontend Developer</p>
-          <div class="cv-header-contact">
-            <div class="cv-header-contact__item">
+      <div
+        class="cv-left"
+        :style="cvInfo.theme.position ? 'order: 1' : 'order: auto'"
+      >
+        <div class="cv-header">
+          <h1 v-if="cvInfo && cvInfo.userInfo && cvInfo.userInfo.name">
+            {{ cvInfo.userInfo.name }}
+          </h1>
+          <p
+            v-if="cvInfo && cvInfo.userInfo && cvInfo.userInfo.jobTitle"
+            class="job-title"
+            :style="`color: ${cvInfo.theme.secondaryColor}`"
+          >
+            {{ cvInfo.userInfo.jobTitle }}
+          </p>
+          <div
+            class="cv-header-contact"
+            v-if="
+              cvInfo &&
+              cvInfo.userInfo &&
+              (cvInfo.userInfo.phone ||
+                cvInfo.userInfo.email ||
+                cvInfo.userInfo.country ||
+                cvInfo.userInfo.city)
+            "
+          >
+            <div
+              class="cv-header-contact__item"
+              v-if="cvInfo && cvInfo.userInfo && cvInfo.userInfo.phone"
+            >
               <PhoneIcon fillColor="#999999" :size="16" />
-              <p>+38268836393</p>
+              <p>{{ cvInfo.userInfo.phone }}</p>
             </div>
-            <div class="cv-header-contact__item">
+            <div
+              class="cv-header-contact__item"
+              v-if="cvInfo && cvInfo.userInfo && cvInfo.userInfo.email"
+            >
               <EmailIcon fillColor="#999999" :size="16" />
-              <p>markodumnic8@gmail.com</p>
+              <p>{{ cvInfo.userInfo.email }}</p>
             </div>
-            <div class="cv-header-contact__item">
+            <div
+              class="cv-header-contact__item"
+              v-if="
+                cvInfo &&
+                cvInfo.userInfo &&
+                (cvInfo.userInfo.country || cvInfo.userInfo.city)
+              "
+            >
               <LocationIcon fillColor="#999999" :size="16" />
-              <p>Montenegro, Niksic</p>
+              <p>
+                {{ cvInfo.userInfo.country
+                }}{{ cvInfo.userInfo.city ? ", " : "" }}
+                {{ cvInfo.userInfo.city }}
+              </p>
             </div>
           </div>
         </div>
         <div class="cv-body">
-          <section class="cv-section">
+          <section
+            class="cv-section"
+            v-if="cvInfo && cvInfo.summary && cvInfo.summary.description"
+          >
             <div class="cv-section-title">
-              <h2>Summary</h2>
+              <h2 :style="`border-color: ${cvInfo.theme.primaryColor}`">
+                Summary
+              </h2>
             </div>
             <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse
-              modi nisi fuga laborum repudiandae fugiat illo quas aliquid
-              repellendus, architecto dicta sit ducimus distinctio sapiente
-              veniam! Ex laudantium quia blanditiis?
+              {{ cvInfo.summary.description }}
             </p>
           </section>
-          <section class="cv-section">
+          <section
+            class="cv-section"
+            v-if="
+              cvInfo &&
+              cvInfo.proffesionalExperiance &&
+              cvInfo.proffesionalExperiance[0].jobTitle
+            "
+          >
             <div class="cv-section-title">
-              <h2>Professional Experience</h2>
+              <h2 :style="`border-color: ${cvInfo.theme.primaryColor}`">
+                Professional Experience
+              </h2>
             </div>
             <div class="experiances-items">
-              <div class="experiance-item">
+              <div
+                class="experiance-item"
+                v-for="(item, index) of cvInfo.proffesionalExperiance"
+                :key="index"
+              >
                 <div class="experiance-item-header">
-                  <h3>Junior Software Engineer</h3>
-                  <p>2019 - 2023</p>
-                </div>
-                <div class="experiance-item-subheader">
-                  <h4>Bild Studio</h4>
-                  <p>Podgorica</p>
-                </div>
-                <div class="experiance-item-details">
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Error nobis officia ad, cumque quia quae corrupti odit
-                    asperiores totam fuga pariatur veniam! Esse eaque sint
-                    libero nulla fugiat sunt maxime.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Error nobis officia ad, cumque quia quae corrupti odit
-                    asperiores totam fuga pariatur veniam! Esse eaque sint
-                    libero nulla fugiat sunt maxime.
+                  <h3 v-if="item.jobTitle">{{ item.jobTitle }}</h3>
+                  <p v-if="item.yearFrom && item.yearTo">
+                    {{ item.yearFrom }} - {{ item.yearTo }}
                   </p>
                 </div>
-              </div>
-              <div class="experiance-item">
-                <div class="experiance-item-header">
-                  <h3>Medior Software Engineer</h3>
-                  <p>2023 - ?</p>
-                </div>
                 <div class="experiance-item-subheader">
-                  <h4>Something New</h4>
-                  <p>?</p>
+                  <h3 :style="`color: ${cvInfo.theme.secondaryColor}`" v-if="item.companyName">{{ item.companyName }}</h3>
+                  <p v-if="item.companyResidance">
+                    {{ item.companyResidance }}
+                  </p>
                 </div>
-                <div class="experiance-item-details">
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Error nobis officia ad, cumque quia quae corrupti odit
-                    asperiores totam fuga pariatur veniam! Esse eaque sint
-                    libero nulla fugiat sunt maxime.
+                <div class="experiance-item-details" v-if="item.details.length">
+                  <p v-for="(detail, index) of item.details" :key="index">
+                    {{ detail.detail }}
                   </p>
                 </div>
               </div>
             </div>
           </section>
-          <section class="cv-section">
+          <section
+            class="cv-section"
+            v-if="cvInfo && cvInfo.projects && cvInfo.projects[0].projectTitle"
+          >
             <div class="cv-section-title">
-              <h2>Projects</h2>
+              <h2 :style="`border-color: ${cvInfo.theme.primaryColor}`">
+                Projects
+              </h2>
             </div>
             <div class="project-items">
-              <div class="project-item">
+              <div
+                class="project-item"
+                v-for="(item, index) of cvInfo.projects"
+                :key="index"
+              >
                 <div class="project-item-header">
-                  <h3>Montenegro T-com</h3>
+                  <h3 :style="`color: ${cvInfo.theme.secondaryColor}`">{{ item.projectTitle }}</h3>
                 </div>
                 <div class="project-item-subheader">
-                  <h4>Montenegro</h4>
+                  <h4 v-if="item.projectResidance">
+                    {{ item.projectResidance }}
+                  </h4>
                 </div>
                 <div class="project-item-details">
-                  <p class="project-item-details-title">
-                    Website development - Custom E-Commerce / Agile
+                  <p
+                    v-if="item.projectDescription"
+                    class="project-item-details-title"
+                  >
+                    {{ item.projectDescription }}
                   </p>
 
-                  <p>Language C#</p>
-                  <p>
-                    Back-End Technologies: .Net Core 2, Entity Framework Core,
-                    PostgreSQL, Elastic Search
-                  </p>
-                </div>
-              </div>
-              <div class="project-item">
-                <div class="project-item-header">
-                  <h3>RecordSetter</h3>
-                </div>
-                <div class="project-item-subheader">
-                  <h4>USA</h4>
-                </div>
-                <div class="project-item-details">
-                  <p class="project-item-details-title">
-                    Website development - Custom E-Commerce / Agile
-                  </p>
-
-                  <p>Language C#</p>
-                  <p>
-                    Back-End Technologies: .Net Core 2, Entity Framework Core,
-                    PostgreSQL, Elastic Search
+                  <p v-for="(detail, index) of item.details" :key="index">
+                    {{ detail.detail }}
                   </p>
                 </div>
               </div>
             </div>
           </section>
-          <section class="cv-section">
+          <section
+            class="cv-section"
+            v-if="cvInfo && cvInfo.education && cvInfo.education[0].schoolTitle"
+          >
             <div class="cv-section-title">
-              <h2>Education</h2>
+              <h2 :style="`border-color: ${cvInfo.theme.primaryColor}`">
+                Education
+              </h2>
             </div>
             <div class="experiances-items">
-              <div class="experiance-item">
+              <div
+                class="experiance-item"
+                v-for="(item, index) of cvInfo.education"
+                :key="index"
+              >
                 <div class="experiance-item-header">
-                  <h3>Master I degree of Computer Science</h3>
-                  <p>2010 - 2013</p>
+                  <h3>{{ item.schoolTitle }}</h3>
+                  <p v-if="item.yearFrom && item.yearTo">
+                    {{ item.yearFrom }} - {{ item.yearTo }}
+                  </p>
                 </div>
                 <div class="experiance-item-subheader">
-                  <h4>Unviersity of Montenegro</h4>
-                  <p>Podgorica</p>
-                </div>
-              </div>
-              <div class="experiance-item">
-                <div class="experiance-item-header">
-                  <h3>Bachelor of Science, Computer Science</h3>
-                  <p>2005 - 2010</p>
-                </div>
-                <div class="experiance-item-subheader">
-                  <h4>Unviersity of Montenegro</h4>
-                  <p>Podgorica</p>
+                  <h3 :style="`color: ${cvInfo.theme.secondaryColor}`" v-if="item.schoolName">{{ item.schoolName }}</h3>
+                  <p v-if="item.schoolResidance">{{ item.schoolResidance }}</p>
                 </div>
               </div>
             </div>
           </section>
         </div>
       </div>
-      <div class="cv-right" style="background-color: #fffasfsafas">
-        <div class="cv-avatar">
+      <div
+        class="cv-right"
+        :style="`background-color: ${cvInfo.theme.primaryColor}`"
+      >
+        <div class="cv-avatar" v-if="cvInfo && cvInfo.userInfo && cvInfo.userInfo.avatar">
           <img
-            src="https://media.licdn.com/dms/image/C5603AQGy9gp1iaz7Hw/profile-displayphoto-shrink_200_200/0/1624287673624?e=1679529600&v=beta&t=l3jadcBuJ72ZVe-0h7GJZKSqw7EYamHoKtuMzsKszwc"
+            :style="
+              cvInfo.theme.avatar ? 'border-radius: 50%' : 'border-radius: 8px'
+            "
+            :src="cvInfo.userInfo.avatar"
             alt="avatar"
           />
         </div>
         <div class="cv-body">
-          <div class="cv-section right-section">
+          <div
+            class="cv-section right-section"
+            v-if="cvInfo && cvInfo.skills && cvInfo.skills[0].skillName"
+          >
             <div class="cv-section-title">
               <h2>Skills</h2>
             </div>
             <div class="skill-items">
-              <div class="skill-item">
+              <div
+                class="skill-item"
+                v-for="(item, index) of cvInfo.skills"
+                :key="index"
+              >
                 <div class="skill-item-title">
-                  <h6>Tools</h6>
+                  <h6>{{ item.skillName }}</h6>
                 </div>
                 <div class="skill-item-details">
-                  <p>C#</p>
-                  <p>MySQL</p>
-                  <p>ASP.NET</p>
-                  <p>ASP.NET Core</p>
-                  <p>PostgreSQL</p>
-                  <p>Visual Studio</p>
-                  <p>ElasticSearch</p>
-                  <p>Postman</p>
-                </div>
-              </div>
-              <div class="skill-item">
-                <div class="skill-item-title">
-                  <h6>Operating Systems</h6>
-                </div>
-                <div class="skill-item-details">
-                  <p>Windows</p>
-                  <p>Ubuntu</p>
+                  <p v-for="(skill, index) of item.setOfSkills" :key="index">
+                    {{ skill.skill }}
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-          <div class="cv-section right-section">
+          <div
+            class="cv-section right-section"
+            v-if="cvInfo && cvInfo.languages && cvInfo.languages[0].name"
+          >
             <div class="cv-section-title">
               <h2>Languages</h2>
             </div>
             <div class="language-items">
-              <div class="language-item">
+              <div
+                class="language-item"
+                v-for="(item, index) of cvInfo.languages"
+                :key="index"
+              >
                 <div class="language-item-left">
-                  <h4>Montenegrian</h4>
-                  <span>Native</span>
+                  <h4>{{ item.name }}</h4>
+                  <span>{{ item.level }}</span>
                 </div>
                 <div class="language-item-right">
-                  <div class="language-item-right__circle circle-active"></div>
-                  <div class="language-item-right__circle circle-active"></div>
-                  <div class="language-item-right__circle circle-active"></div>
-                  <div class="language-item-right__circle circle-active"></div>
-                  <div class="language-item-right__circle circle-active"></div>
-                </div>
-              </div>
-              <div class="language-item">
-                <div class="language-item-left">
-                  <h4>English</h4>
-                  <span>Intermediate</span>
-                </div>
-                <div class="language-item-right">
-                  <div class="language-item-right__circle circle-active"></div>
-                  <div class="language-item-right__circle circle-active"></div>
-                  <div class="language-item-right__circle"></div>
-                  <div class="language-item-right__circle"></div>
-                  <div class="language-item-right__circle"></div>
+                  <div
+                    class="language-item-right__circle"
+                    :class="{ 'circle-active': item.stars >= 1 }"
+                  ></div>
+                  <div
+                    class="language-item-right__circle"
+                    :class="{ 'circle-active': item.stars >= 2 }"
+                  ></div>
+                  <div
+                    class="language-item-right__circle"
+                    :class="{ 'circle-active': item.stars >= 3 }"
+                  ></div>
+                  <div
+                    class="language-item-right__circle"
+                    :class="{ 'circle-active': item.stars >= 4 }"
+                  ></div>
+                  <div
+                    class="language-item-right__circle"
+                    :class="{ 'circle-active': item.stars >= 5 }"
+                  ></div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="cv-section right-section">
+          <div
+            class="cv-section right-section"
+            v-if="cvInfo && cvInfo.hobbies && cvInfo.hobbies[0].name"
+          >
             <div class="cv-section-title">
               <h2>Hobbies</h2>
             </div>
             <div class="hobbie-items">
-              <div class="hobbie-item">
-                <p>Hiking</p>
-                <p>CrossFit</p>
-                <p>Photography</p>
+              <div class="hobbie-item" v-if="cvInfo.hobbies[0].name">
+                <p v-for="(item, index) of cvInfo.hobbies" :key="index">
+                  {{ item.name }}
+                </p>
               </div>
             </div>
           </div>
-          <div class="cv-section right-section">
+          <div class="cv-section right-section"
+          v-if="cvInfo && cvInfo.social && (cvInfo.social.linkedin || cvInfo.social.instagram || cvInfo.social.facebook || cvInfo.social.twitter || cvInfo.social.github || cvInfo.social.discord)">
             <div class="cv-section-title">
               <h2>Find Me Online</h2>
             </div>
             <div class="social-items">
-              <div class="social-item">
+              <div class="social-item" v-if="cvInfo.social.linkedin">
                 <div class="social-item-left">
-                  <LinkedInIcon fillColor="#fff" />
+                  <LinkedInIcon :size="16" fillColor="#fff" />
                 </div>
                 <div class="social-item-right">
                   <p>LinkedIn</p>
-                  <a
-                    href="https://www.linkedin.com/in/marko-dumni%C4%87-714b72198/"
-                    target="_blank"
-                  >
-                    https://www.linkedin.com/in/marko-dumni%C4%87-714b72198/
+                  <a :href="cvInfo.social.linkedin" target="_blank">
+                    {{ cvInfo.social.linkedin }}
                   </a>
                 </div>
               </div>
-              <div class="social-item">
+              <div class="social-item" v-if="cvInfo.social.github">
                 <div class="social-item-left">
-                  <InstagramIcon fillColor="#fff" />
+                  <GithubIcon :size="16" fillColor="#fff" />
+                </div>
+                <div class="social-item-right">
+                  <p>GitHub</p>
+                  <a :href="cvInfo.social.github" target="_blank">
+                    {{ cvInfo.social.github }}
+                  </a>
+                </div>
+              </div>
+              <div class="social-item" v-if="cvInfo.social.instagram">
+                <div class="social-item-left">
+                  <InstagramIcon :size="16" fillColor="#fff" />
                 </div>
                 <div class="social-item-right">
                   <p>Instagram</p>
-                  <a
-                    href="https://www.instagram.com/marko.dumnic/"
-                    target="_blank"
-                  >
-                    @marko.dumnic
+                  <a :href="cvInfo.social.instagram" target="_blank">
+                    {{ cvInfo.social.instagram }}
+                  </a>
+                </div>
+              </div>
+              <div class="social-item" v-if="cvInfo.social.facebook">
+                <div class="social-item-left">
+                  <FacebookIcon :size="16" fillColor="#fff" />
+                </div>
+                <div class="social-item-right">
+                  <p>Facebook</p>
+                  <a :href="cvInfo.social.facebook" target="_blank">
+                    {{ cvInfo.social.facebook }}
+                  </a>
+                </div>
+              </div>
+              <div class="social-item" v-if="cvInfo.social.twitter">
+                <div class="social-item-left">
+                  <TwitterIcon :size="16" fillColor="#fff" />
+                </div>
+                <div class="social-item-right">
+                  <p>Twitter</p>
+                  <a :href="cvInfo.social.twitter" target="_blank">
+                    {{ cvInfo.social.twitter }}
+                  </a>
+                </div>
+              </div>
+              <div class="social-item" v-if="cvInfo.social.discord">
+                <div class="social-item-left">
+                  <DiscordIcon :size="16" fillColor="#fff" />
+                </div>
+                <div class="social-item-right">
+                  <p>Discord</p>
+                  <a :href="cvInfo.social.discord" target="_blank">
+                    {{ cvInfo.social.discord }}
                   </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-// import PhoneIcon from "vue-material-design-icons/Phone.vue";
-// import LocationIcon from "vue-material-design-icons/MapMarker.vue";
-// import EmailIcon from "vue-material-design-icons/At.vue";
+import PhoneIcon from "vue-material-design-icons/Phone.vue";
+import LocationIcon from "vue-material-design-icons/MapMarker.vue";
+import EmailIcon from "vue-material-design-icons/At.vue";
 import html2pdf from "html2pdf.js";
-// import LinkedInIcon from "vue-material-design-icons/Linkedin.vue";
-// import InstagramIcon from "vue-material-design-icons/Instagram.vue";
+import FacebookIcon from "vue-material-design-icons/Facebook.vue";
+import LinkedInIcon from "vue-material-design-icons/Linkedin.vue";
+import GithubIcon from "vue-material-design-icons/Github.vue";
+import DiscordIcon from "vue-material-design-icons/Discord.vue";
+import InstagramIcon from "vue-material-design-icons/Instagram.vue";
+import TwitterIcon from "vue-material-design-icons/Twitter.vue";
+import { useCvStore } from "@/stores/cv";
+
 export default {
   components: {
-    // PhoneIcon,
-    // LocationIcon,
-    // LinkedInIcon,
-    // InstagramIcon,
-    // EmailIcon,
+    PhoneIcon,
+    LocationIcon,
+    LinkedInIcon,
+    InstagramIcon,
+    FacebookIcon,
+    GithubIcon,
+    DiscordIcon,
+    TwitterIcon,
+    EmailIcon,
   },
   props: {
     userInfo: Object,
   },
+
+  computed: {
+    cvInfo() {
+      return useCvStore().cvInfo;
+    },
+  },
   methods: {
     exportToPDF() {
       html2pdf(document.getElementById("cv"), {
-        filename: "cv.pdf",
+        filename: `${this.cvInfo.theme.cvName}.pdf`,
         image: { type: "jpeg", quality: 1 },
         html2canvas: {
           dpi: 192,
