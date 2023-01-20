@@ -1,6 +1,6 @@
 <template>
   <div class="cv-outter">
-    <div id="cv" style="font-family: 'Quicksand', sans-serif"> 
+    <div id="cv-example" style="font-family: 'Quicksand', sans-serif"> 
       <div class="cv-left">
         <div class="cv-header">
           <h1>Marko Dumnic</h1>
@@ -302,9 +302,9 @@ export default {
     userInfo: Object,
   },
   methods: {
-    exportToPDF() {
-      html2pdf(document.getElementById("cv"), {
-        filename: "cv.pdf",
+    exportToPDF2() {
+      html2pdf(document.getElementById("cv-example"), {
+        filename: "cv-example.pdf",
         image: { type: "jpeg", quality: 1 },
         html2canvas: {
           dpi: 192,

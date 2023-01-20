@@ -155,6 +155,19 @@ export const useCvStore = defineStore('cvStore', {
                             hobby: 'Hobi',
                             hobbyName: 'Ime Hobija'
                         }
+                    },
+                    buttons: {
+                        newJob: 'Dodaj novi posao',
+                        newJobDetail: 'Dodaj novi poslovni detalj',
+                        newProject: 'Dodaj novi projekat',
+                        newProjectDetail: 'Dodaj novi projektni detalj',
+                        newSchool: 'Dodaj novu školu',
+                        newSkill: 'Dodaj novi skil',
+                        newSkillDetail: 'Dodaj novi skil detalj',
+                        newLanguage: 'Dodaj novi jezik',
+                        newHobby: 'Dodaj novi hobi',
+                        save: 'Sačuvaj',
+                        export: 'Eksportuj CV',
                     }
                 },
                 en: {
@@ -235,6 +248,19 @@ export const useCvStore = defineStore('cvStore', {
                             hobby: 'Hobby',
                             hobbyName: 'Hobby Name'
                         }
+                    },
+                    buttons: {
+                        newJob: 'Add new job',
+                        newJobDetail: 'Add new job detail',
+                        newProject: 'Add new project',
+                        newProjectDetail: 'Add new project detail',
+                        newSchool: 'Add new school',
+                        newSkill: 'Add new skill',
+                        newSkillDetail: 'Add new skill detail',
+                        newLanguage: 'Add new language',
+                        newHobby: 'Add new hobby',
+                        save: 'Save',
+                        export: 'Export CV',
                     }
                 }
             }
@@ -254,7 +280,10 @@ export const useCvStore = defineStore('cvStore', {
         },
         getCvTranslationSectionLabels: (state) => {
             return state.cvTranslations[state.cvInfo.theme.language].sectionLabels;
-        }
+        },
+        getCvTranslationButton: (state) => {
+            return state.cvTranslations[state.cvInfo.theme.language].buttons;
+        },
     },
     actions: {
         setCvInfo(payload) {

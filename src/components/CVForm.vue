@@ -289,7 +289,7 @@
                         <div class="md-layout md-gutter">
                           <div class="md-layout-item md-small-size-100">
                             <md-field>
-                              <label for="first-name">Job Detail</label>
+                              <label for="first-name">{{sectionLabelTranslations.proffesionalExperiance.jobDetail}}</label>
                               <md-input v-model="itemDetail.detail" />
                             </md-field>
                           </div>
@@ -303,14 +303,14 @@
                 <md-button
                   @click.prevent="addNewJobDetail(index)"
                   class="md-primary"
-                  >Add new job detail</md-button
+                  >{{buttonTranslations.newJobDetail}}</md-button
                 >
               </md-card-actions>
             </md-card>
           </md-card-content>
           <md-card-actions>
             <md-button @click.prevent="addNewJob()" class="md-primary"
-              >Add new job</md-button
+              >{{buttonTranslations.newJob}}</md-button
             >
           </md-card-actions>
         </md-card></md-step
@@ -380,14 +380,14 @@
                 <md-button
                   @click.prevent="addNewProjectDetail(index)"
                   class="md-primary"
-                  >Add new project detail</md-button
+                  >{{buttonTranslations.newProjectDetail}}</md-button
                 >
               </md-card-actions>
             </md-card>
           </md-card-content>
           <md-card-actions>
             <md-button @click.prevent="addNewProject()" class="md-primary"
-              >Add new project</md-button
+              >{{buttonTranslations.newProject}}</md-button
             >
           </md-card-actions>
         </md-card></md-step
@@ -457,7 +457,7 @@
           </md-card-content>
           <md-card-actions>
             <md-button @click.prevent="addNewSchool()" class="md-primary"
-              >Add new school</md-button
+              >{{buttonTranslations.newSchool}}</md-button
             >
           </md-card-actions>
         </md-card>
@@ -512,14 +512,14 @@
                 <md-button
                   @click.prevent="addNewSkillDetail(index)"
                   class="md-primary"
-                  >Add new skill detail</md-button
+                  >{{buttonTranslations.newSkillDetail}}</md-button
                 >
               </md-card-actions>
             </md-card>
           </md-card-content>
           <md-card-actions>
             <md-button @click.prevent="addNewSkill()" class="md-primary"
-              >Add new skill</md-button
+              >{{buttonTranslations.newSkill}}</md-button
             >
           </md-card-actions>
         </md-card>
@@ -569,7 +569,7 @@
           </md-card-content>
           <md-card-actions>
             <md-button @click.prevent="addNewLanguage()" class="md-primary"
-              >Add new language</md-button
+              >{{buttonTranslations.newLanguage}}</md-button
             >
           </md-card-actions>
         </md-card>
@@ -604,7 +604,7 @@
           </md-card-content>
           <md-card-actions>
             <md-button @click.prevent="addNewHobby()" class="md-primary"
-              >Add new hobby</md-button
+              >{{buttonTranslations.newHobby}}</md-button
             >
           </md-card-actions>
         </md-card>
@@ -721,6 +721,9 @@ export default {
     },
     sectionLabelTranslations() {
       return useCvStore().getCvTranslationSectionLabels;
+    },
+    buttonTranslations() {
+      return useCvStore().getCvTranslationButton;
     }
   },
   mounted() {

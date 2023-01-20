@@ -3,19 +3,25 @@
     <CVTabs @setactivetab="activeTab = $event" :activeTab="activeTab" />
     <CVForm v-show="activeTab == 0" ref="form" />
     <CVPreview v-show="activeTab == 1" ref="preview" />
-    <CVExample v-show="activeTab == 2" ref="preview" />
+    <CVExample v-show="activeTab == 2" ref="example" />
 
     <md-button
       v-if="activeTab == 0"
       class="save-btn md-raised md-primary"
       @click.prevent="saveCvInfo()"
-      >Save</md-button
+      >{{buttonTranslations.save}}</md-button
     >
     <md-button
-      v-if="activeTab !== 0"
+      v-if="activeTab == 1"
       class="save-btn md-raised md-primary"
       @click.prevent="exportToPDF()"
-      >Export CV</md-button
+      >{{buttonTranslations.export}}</md-button
+    >
+    <md-button
+      v-if="activeTab == 2"
+      class="save-btn md-raised md-primary"
+      @click.prevent="exportToPDF2()"
+      >{{buttonTranslations.export}}</md-button
     >
     <div class="tag">
       <p>
@@ -44,17 +50,23 @@ export default {
   data() {
     return {
       activeTab: 0,
-      cvStore: useCvStore(),
     };
   },
 
-  computed: {},
+  computed: {
+    buttonTranslations() {
+      return useCvStore().getCvTranslationButton;
+    },
+  },
   methods: {
     saveCvInfo() {
       this.$refs.form.saveCvInfo();
     },
     exportToPDF() {
       this.$refs.preview.exportToPDF();
+    },
+    exportToPDF2() {
+      this.$refs.example.exportToPDF2();
     },
   },
 };
@@ -79,6 +91,14 @@ body {
   transition: ease-in-out 0.3s all;
 }
 #cv {
+  display: flex;
+  background: #ffffe0;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+#cv-example {
   display: flex;
   background: #ffffe0;
   width: 100%;
