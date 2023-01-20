@@ -23,7 +23,7 @@
             id="language"
           >
             <md-option value="en">English</md-option>
-            <md-option value="me">Montenegrian</md-option>
+            <md-option value="me">Serbian</md-option>
           </md-select>
         </md-field>
 
