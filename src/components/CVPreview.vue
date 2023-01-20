@@ -98,7 +98,12 @@
                   </p>
                 </div>
                 <div class="experiance-item-subheader">
-                  <h3 :style="`color: ${cvInfo.theme.secondaryColor}`" v-if="item.companyName">{{ item.companyName }}</h3>
+                  <h3
+                    :style="`color: ${cvInfo.theme.secondaryColor}`"
+                    v-if="item.companyName"
+                  >
+                    {{ item.companyName }}
+                  </h3>
                   <p v-if="item.companyResidance">
                     {{ item.companyResidance }}
                   </p>
@@ -127,7 +132,9 @@
                 :key="index"
               >
                 <div class="project-item-header">
-                  <h3 :style="`color: ${cvInfo.theme.secondaryColor}`">{{ item.projectTitle }}</h3>
+                  <h3 :style="`color: ${cvInfo.theme.secondaryColor}`">
+                    {{ item.projectTitle }}
+                  </h3>
                 </div>
                 <div class="project-item-subheader">
                   <h4 v-if="item.projectResidance">
@@ -171,7 +178,12 @@
                   </p>
                 </div>
                 <div class="experiance-item-subheader">
-                  <h3 :style="`color: ${cvInfo.theme.secondaryColor}`" v-if="item.schoolName">{{ item.schoolName }}</h3>
+                  <h3
+                    :style="`color: ${cvInfo.theme.secondaryColor}`"
+                    v-if="item.schoolName"
+                  >
+                    {{ item.schoolName }}
+                  </h3>
                   <p v-if="item.schoolResidance">{{ item.schoolResidance }}</p>
                 </div>
               </div>
@@ -183,7 +195,10 @@
         class="cv-right"
         :style="`background-color: ${cvInfo.theme.primaryColor}`"
       >
-        <div class="cv-avatar" v-if="cvInfo && cvInfo.userInfo && cvInfo.userInfo.avatar">
+        <div
+          class="cv-avatar"
+          v-if="cvInfo && cvInfo.userInfo && cvInfo.userInfo.avatar"
+        >
           <img
             :style="
               cvInfo.theme.avatar ? 'border-radius: 50%' : 'border-radius: 8px'
@@ -274,8 +289,19 @@
               </div>
             </div>
           </div>
-          <div class="cv-section right-section"
-          v-if="cvInfo && cvInfo.social && (cvInfo.social.linkedin || cvInfo.social.instagram || cvInfo.social.facebook || cvInfo.social.twitter || cvInfo.social.github || cvInfo.social.discord)">
+          <div
+            class="cv-section right-section"
+            v-if="
+              cvInfo &&
+              cvInfo.social &&
+              (cvInfo.social.linkedin ||
+                cvInfo.social.instagram ||
+                cvInfo.social.facebook ||
+                cvInfo.social.twitter ||
+                cvInfo.social.github ||
+                cvInfo.social.discord)
+            "
+          >
             <div class="cv-section-title">
               <h2>Find Me Online</h2>
             </div>
