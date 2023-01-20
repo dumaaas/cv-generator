@@ -335,20 +335,20 @@
                 <div class="md-layout md-gutter">
                   <div class="md-layout-item md-small-size-100">
                     <md-field>
-                      <label for="first-name">{{sectionLabelTranslations.proffesionalExperiance.projectName}}</label>
+                      <label for="first-name">{{sectionLabelTranslations.projects.projectName}}</label>
                       <md-input v-model="item.projectTitle" />
                     </md-field>
                     <div class="md-layout md-gutter">
                       <div class="md-layout-item md-small-size-100">
                         <md-field>
-                          <label for="first-name">{{sectionLabelTranslations.proffesionalExperiance.projectResidance}}</label>
+                          <label for="first-name">{{sectionLabelTranslations.projects.projectResidance}}</label>
                           <md-input v-model="item.projectResidance" />
                         </md-field>
                       </div>
 
                       <div class="md-layout-item md-small-size-100">
                         <md-field>
-                          <label for="first-name">{{sectionLabelTranslations.proffesionalExperiance.projectDescription}}</label>
+                          <label for="first-name">{{sectionLabelTranslations.projects.projectDescription}}</label>
                           <md-input v-model="item.projectDescription" />
                         </md-field>
                       </div>
@@ -360,13 +360,13 @@
                       :key="index"
                     >
                       <md-card-header>
-                        <h3>{{sectionLabelTranslations.proffesionalExperiance.projectDetail}} {{ index + 1 }}</h3>
+                        <h3>{{sectionLabelTranslations.projects.projectDetail}} {{ index + 1 }}</h3>
                       </md-card-header>
                       <md-card-content>
                         <div class="md-layout md-gutter">
                           <div class="md-layout-item md-small-size-100">
                             <md-field>
-                              <label for="first-name">{{sectionLabelTranslations.proffesionalExperiance.projectDetail}}</label>
+                              <label for="first-name">{{sectionLabelTranslations.projects.projectDetail}}</label>
                               <md-input v-model="itemDetail.detail" />
                             </md-field>
                           </div>
