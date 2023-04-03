@@ -431,7 +431,7 @@ export default {
           letterRendering: false,
           useCORS: true,
         },
-        // pagebreak: { mode: ["avoid-all", "css", "legacy"] },
+        pagebreak: { mode: ["avoid-all", "css", "legacy"] },
         jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
       });
     },
